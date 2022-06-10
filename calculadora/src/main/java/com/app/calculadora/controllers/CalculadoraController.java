@@ -22,14 +22,14 @@ public class CalculadoraController {
         this.config = config;
     }
 
-    @Value("${calculadora.saludo1}")
-    private String saludo1;
+    @Value("${calculadora.saludoManana}")
+    private String saludoManana;
 
-    @Value("${calculadora.saludo2}")
-    private String saludo2;
+    @Value("${calculadora.saludoTarde}")
+    private String saludoTarde;
 
-    @Value("${calculadora.saludo3}")
-    private String saludo3;
+    @Value("${calculadora.saludoNoche}")
+    private String saludoNoche;
 
     @GetMapping("/sumar")
     public ResponseEntity getSuma(@PathParam("num1") String num1, @PathParam("num2") String num2){
@@ -37,7 +37,8 @@ public class CalculadoraController {
         double numero2 = Double.parseDouble(num2);
         double resultado = numero1 + numero2;
         String mensaje = "El resultado de sumar: " + num1 + " + " + num2 + " es " + resultado;
-        String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op1");
+       // String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op1");
+        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacionSuma(OperacionConfig.SUMA);
         return ResponseEntity.ok(mensaje+mensaje2);
     }
 
@@ -47,7 +48,8 @@ public class CalculadoraController {
         double numero2 = Double.parseDouble(num2);
         double resultado = numero1 - numero2;
         String mensaje = "El resultado de restar: " + num1 + " - " + num2 + " es " + resultado;
-        String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op2");
+        //String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op2");
+        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacionResta(OperacionConfig.RESTA);
         return ResponseEntity.ok(mensaje+mensaje2);
     }
 
@@ -57,7 +59,8 @@ public class CalculadoraController {
         double numero2 = Double.parseDouble(num2);
         double resultado = numero1 * numero2;
         String mensaje = "El resultado de multiplicar: " + num1 + " * " + num2 + " es " + resultado;
-        String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op3");
+        //String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op3");
+        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacionMultiplicacion(OperacionConfig.MULTIPLICACION);
         return ResponseEntity.ok(mensaje+mensaje2);
     }
 
@@ -72,17 +75,27 @@ public class CalculadoraController {
             double resultado = numero1 / numero2;
             mensaje = "El resultado de dividir: " + num1 + " / " + num2 + " es " + resultado;
         }
-        String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op4");
+        //String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op4");
+        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacionDivision(OperacionConfig.DIVISION);
         return ResponseEntity.ok(mensaje+mensaje2);
     }
 
     @GetMapping("/menu")
     public ResponseEntity getOperaciones(){
+        /*
         ArrayList<String> lista = new ArrayList<>(config.getTipo().values());
         String mensaje = "Operaciones:";
         for(String i:lista){
             mensaje += "\n" + i;
         }
+        return ResponseEntity.ok(mensaje);
+        */
+        String mensaje = "Operaciones:" +
+                "\n" + config.getOperacionSuma(OperacionConfig.SUMA) +
+                "\n" + config.getOperacionResta(OperacionConfig.RESTA) +
+                "\n" + config.getOperacionMultiplicacion(OperacionConfig.MULTIPLICACION) +
+                "\n" + config.getOperacionDivision(OperacionConfig.DIVISION);
+
         return ResponseEntity.ok(mensaje);
     }
 
@@ -92,11 +105,11 @@ public class CalculadoraController {
         String mensaje;
 
         if( horaNum >= 6 && horaNum < 12){
-            mensaje = saludo1;
+            mensaje = saludoManana;
         } else if(horaNum >= 12 && horaNum < 18){
-            mensaje = saludo2;
+            mensaje = saludoTarde;
         }else{
-            mensaje = saludo3;
+            mensaje = saludoNoche;
         }
         return ResponseEntity.ok(mensaje + " " + nombre);
     }
