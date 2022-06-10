@@ -1,6 +1,7 @@
 package com.app.calculadora.controllers;
 
 import com.app.calculadora.config.OperacionConfig;
+import com.app.calculadora.services.InterfazCalculadoraService;
 import org.springframework.aop.target.CommonsPool2TargetSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,14 @@ import java.util.ArrayList;
 public class CalculadoraController {
 
     OperacionConfig config;
+    InterfazCalculadoraService calculadoraService;
 
-    public CalculadoraController(OperacionConfig config){
+    public CalculadoraController(OperacionConfig config, InterfazCalculadoraService calculadoraService){
         this.config = config;
+        this.calculadoraService = calculadoraService;
     }
+
+
 
     @Value("${calculadora.saludoManana}")
     private String saludoManana;
@@ -31,15 +36,11 @@ public class CalculadoraController {
     @Value("${calculadora.saludoNoche}")
     private String saludoNoche;
 
+
+    //Utilizando inyección de dependencias
     @GetMapping("/sumar")
     public ResponseEntity getSuma(@PathParam("num1") String num1, @PathParam("num2") String num2){
-        double numero1 = Double.parseDouble(num1);
-        double numero2 = Double.parseDouble(num2);
-        double resultado = numero1 + numero2;
-        String mensaje = "El resultado de sumar: " + num1 + " + " + num2 + " es " + resultado;
-       // String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op1");
-        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacion(OperacionConfig.SUMA);
-        return ResponseEntity.ok(mensaje+mensaje2);
+        return ResponseEntity.ok(calculadoraService.getSumaService(num1,num2));
     }
 
     @GetMapping("/restar")
