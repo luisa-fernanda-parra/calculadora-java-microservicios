@@ -17,20 +17,9 @@ public class OperacionConfig {
 
     private Map<String,String> tipo;
 
-    public String getOperacionSuma(final String operacionSuma){
-        return tipo.get(operacionSuma);
-    }
+    public String getOperacion(final String operacion){
 
-    public String getOperacionResta(final String operacionResta){
-        return tipo.get(operacionResta);
-    }
-
-    public String getOperacionMultiplicacion(final String operacionMultiplicacion){
-        return tipo.get(operacionMultiplicacion);
-    }
-
-    public String getOperacionDivision(final String operacionDivision){
-        return tipo.get(operacionDivision);
+        return tipo.get(operacion);
     }
 
     public Map<String,String> getTipo(){

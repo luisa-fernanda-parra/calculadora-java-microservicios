@@ -38,7 +38,7 @@ public class CalculadoraController {
         double resultado = numero1 + numero2;
         String mensaje = "El resultado de sumar: " + num1 + " + " + num2 + " es " + resultado;
        // String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op1");
-        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacionSuma(OperacionConfig.SUMA);
+        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacion(OperacionConfig.SUMA);
         return ResponseEntity.ok(mensaje+mensaje2);
     }
 
@@ -49,7 +49,7 @@ public class CalculadoraController {
         double resultado = numero1 - numero2;
         String mensaje = "El resultado de restar: " + num1 + " - " + num2 + " es " + resultado;
         //String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op2");
-        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacionResta(OperacionConfig.RESTA);
+        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacion(OperacionConfig.RESTA);
         return ResponseEntity.ok(mensaje+mensaje2);
     }
 
@@ -60,7 +60,7 @@ public class CalculadoraController {
         double resultado = numero1 * numero2;
         String mensaje = "El resultado de multiplicar: " + num1 + " * " + num2 + " es " + resultado;
         //String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op3");
-        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacionMultiplicacion(OperacionConfig.MULTIPLICACION);
+        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacion(OperacionConfig.MULTIPLICACION);
         return ResponseEntity.ok(mensaje+mensaje2);
     }
 
@@ -76,7 +76,7 @@ public class CalculadoraController {
             mensaje = "El resultado de dividir: " + num1 + " / " + num2 + " es " + resultado;
         }
         //String mensaje2 = "\nUtilizaste el servicio de " + config.getTipo().get("op4");
-        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacionDivision(OperacionConfig.DIVISION);
+        String mensaje2 = "\nUtilizaste el servicio de " + config.getOperacion(OperacionConfig.DIVISION);
         return ResponseEntity.ok(mensaje+mensaje2);
     }
 
@@ -91,10 +91,10 @@ public class CalculadoraController {
         return ResponseEntity.ok(mensaje);
         */
         String mensaje = "Operaciones:" +
-                "\n" + config.getOperacionSuma(OperacionConfig.SUMA) +
-                "\n" + config.getOperacionResta(OperacionConfig.RESTA) +
-                "\n" + config.getOperacionMultiplicacion(OperacionConfig.MULTIPLICACION) +
-                "\n" + config.getOperacionDivision(OperacionConfig.DIVISION);
+                "\n" + config.getOperacion(OperacionConfig.SUMA) +
+                "\n" + config.getOperacion(OperacionConfig.RESTA) +
+                "\n" + config.getOperacion(OperacionConfig.MULTIPLICACION) +
+                "\n" + config.getOperacion(OperacionConfig.DIVISION);
 
         return ResponseEntity.ok(mensaje);
     }
